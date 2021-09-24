@@ -11,14 +11,14 @@ This is a command-line based Python program for managing Student information usi
 3. MySQL: `v8.x.x`
 4. A clone of [Student Management Software repository](https://github.com/thesyedbasim/student-management) on your local machine
 
-_Please install the same versions mentioned above as later/earlier versions might have breaking changes and hence the program will not run as expected._
+_Please install the same versions mentioned above as later/earlier versions might have breaking changes and hence the program might not run as expected._
 
 ### Initialization
 
 1. Create a `config.py` file. This file is not provided in [this repository](https://github.com/thesyedbasim/student-management) for security reasons.
 2. Copy and paste the following code in the `config.py` file. _Replace the values with your actual database connection credentials._
 
-```
+```python
 DB_CONFIG = {
   'host': 'localhost',
   'username': YOUR_USERNAME,
@@ -57,3 +57,7 @@ No. This app can perform only basic CRUD operations for `students` and `classes`
 This app is designed specifically to perform the required operations and not real life use cases. This app is not designed to be scalable.
 
 This app has known issues. You can take a look at all the issues [here](https://github.com/thesyedbasim/student-management/issues). However this app has no intention to prevent these issues and add more features.
+
+### Can I know the technical details of this app?
+
+Yes. You can take a look at the [project synopsis](https://github.com/thesyedbasim/student-management/blob/master/SYNOPSIS.md) for technical details.
