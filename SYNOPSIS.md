@@ -48,23 +48,18 @@ Using `while` loop, the questions are repeated. In each iteration, a question wi
 
 ### What is the tech stack used?
 
-Primary programming language
-: Python
+Primary programming language:
+**Python**
 
-Primary Database
-: MySQL
+Primary Database:
+**MySQL**
 
-`mysql-connector-python`
-: Library used for connecting the Python program with MySQL Database. _Installed via `pip`_
+Libraries:
 
-Database Design Tool
-: MySQL Workbench
+1. `mysql-connector-python`
 
-Code Editor
-: Visual Studio Code
-
-Version Control
-: `Git`, `GitHub` for hosting repository
+Database Design Tool:
+**MySQL Workbench**
 
 ### How do we know your Python and MySQL skills?
 
