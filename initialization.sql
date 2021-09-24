@@ -1,5 +1,5 @@
-CREATE DATABASE test;
-USE test;
+CREATE DATABASE school;
+USE school;
 
 CREATE TABLE classes (
 	class_id CHAR(5),
