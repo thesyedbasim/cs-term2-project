@@ -1,5 +1,11 @@
 import helper_fns
 
+classFields = {
+  'class_id': 'Class ID',
+  'grade': 'Grade',
+  'section': 'Section',
+}
+
 def createNewClass(db_objs):
   helper_fns.createSeparation('CREATE A NEW CLASS')
 

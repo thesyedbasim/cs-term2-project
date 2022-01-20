@@ -1,4 +1,16 @@
+import copy
 import helper_fns
+from classes_table import classFields
+
+studentFields = {
+  'student_id': 'StudentID',
+  'full_name': 'Full Name',
+  'class_id': 'Class ID'
+}
+
+studentFieldsNaturalJoin = copy.copy(studentFields)
+del studentFieldsNaturalJoin['class_id']
+studentFieldsNaturalJoin.update(classFields)
 
 def createNewStudent(db_objs):
   helper_fns.createSeparation('CREATE A NEW STUDENT')
@@ -24,7 +36,10 @@ def createNewStudent(db_objs):
 def getAllStudents(db_objs):
   helper_fns.createSeparation('GET ALL STUDENTS')
 
-  query = """SELECT * FROM `students`"""
+  query = (
+    f"SELECT {', '.join(studentFieldsNaturalJoin.keys())} FROM `students` s "
+    "NATURAL JOIN `classes`"
+  )
 
   try:
     db_objs['cursor'].execute(query)
@@ -45,9 +60,43 @@ def getAllStudents(db_objs):
 
       helper_fns.createSeparation()
 
-      print('Student ID:', student[0])
-      print('Full name:', student[1])
-      print('Class ID:', student[2])
+      for index, studentTableValue in enumerate(studentFieldsNaturalJoin.values()):
+        print(studentTableValue + ':', student[index])
+  except:
+    print('There was some error getting all students, please try again later.')
+
+def getAllStudentsByClass(db_objs):
+  helper_fns.createSeparation('GET ALL STUDENTS FROM CLASS')
+
+  classId = input('Enter Class ID to get all students from: ')
+
+  query = (
+    f"SELECT {', '.join(studentFieldsNaturalJoin.keys())} FROM `students` "
+    "NATURAL JOIN `classes` "
+    f"WHERE class_id = '{classId}'"
+  )
+
+  try:
+    db_objs['cursor'].execute(query)
+
+    students = db_objs['cursor'].fetchall()
+
+    totalStudents = db_objs['cursor'].rowcount
+
+    if totalStudents < 1:
+      print('There are no students!')
+      return
+
+    print('Total Students:', totalStudents)
+
+    for student in students:
+      if student[0] == '':
+        continue
+
+      helper_fns.createSeparation()
+
+      for index, studentTableValue in enumerate(studentFieldsNaturalJoin.values()):
+        print(studentTableValue + ':', student[index])
   except:
     print('There was some error getting all students, please try again later.')
 
@@ -65,9 +114,8 @@ def getOneStudent(db_objs):
     db_objs['cursor'].execute(query)
     student = db_objs['cursor'].fetchone()
 
-    print('Student ID: ', student[0])
-    print('Full name: ', student[1])
-    print('Class ID: ', student[2])
+    for index, studentTableValue in enumerate(studentFields.values()):
+      print(studentTableValue + ':', student[index])
   except:
     print('There was some error getting the student, please try again later.')
 

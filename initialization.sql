@@ -14,4 +14,8 @@ CREATE TABLE students (
     class_id CHAR(5),
     PRIMARY KEY(student_id),
     FOREIGN KEY(class_id) REFERENCES classes(class_id)
-)
+);
+
+SELECT full_name, grade, class_id FROM students
+NATURAL JOIN classes
+WHERE class_id = 'CL001'

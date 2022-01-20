@@ -54,6 +54,10 @@ supportedQueries = [
         'fn': students_table.getAllStudents
       },
       {
+        'display': 'Get all Students By Class ID',
+        'fn': students_table.getAllStudentsByClass
+      },
+      {
         'display': 'Get a specific Student by ID',
         'fn': students_table.getOneStudent
       },
