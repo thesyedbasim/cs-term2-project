@@ -30,31 +30,21 @@ def createNewClass(db_objs):
 def getAllClasses(db_objs):
   helper_fns.createSeparation('GET ALL CLASSES')
 
-  query = """SELECT * FROM `classes`"""
-  db_objs['cursor'].execute(query)
-
-  classes = db_objs['cursor'].fetchall()
-
-  totalClasses = db_objs['cursor'].rowcount
-
-  if totalClasses < 1:
-    print('There are no classes!')
-    return
-
-  print('Total Classes:', totalClasses)
-
-  for classItem in classes:
-    if classItem[0] == '':
-      continue
-
-    helper_fns.createSeparation()
-
-    print('CLASS_ID:', classItem[0])
-    print('GRADE:', classItem[1])
-    print('SECTION:', classItem[2])
+  query = "SELECT * FROM `classes`"
 
   try:
     db_objs['cursor'].execute(query)
+    classes = db_objs['cursor'].fetchall()
+
+    totalClasses = db_objs['cursor'].rowcount
+
+    if totalClasses < 1:
+      print('There are no classes!')
+      return
+
+    print('\nTotal Classes:', totalClasses, '\n')
+
+    helper_fns.createTableFrom2DList(helper_fns.createTupleAndPrependToArray(classFields.values(), classes))
   except:
     print('There was some error getting all classes, please try again later.')
 
@@ -73,9 +63,11 @@ def getOneClass(db_objs):
 
     classItem = db_objs['cursor'].fetchone()
 
-    print('Class ID:', classItem[0])
-    print('Grade:', classItem[1])
-    print('Section:', classItem[2])
+    if not classItem:
+      print('No class found with that ID.')
+      return
+
+    helper_fns.createTableFrom2DList(helper_fns.createTupleAndPrependToArray(classFields.values(), [classItem]))
   except:
     print('There was some error getting a class, please try again later.')
 

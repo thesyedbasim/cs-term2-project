@@ -73,21 +73,31 @@ supportedQueries = [
   },
 ]
 
+# helper_fns.displayIntroduction('Welcome to Student Management System')
+
+helper_fns.clearTerminal()
+
 isRunning = True
 while isRunning:
-  helper_fns.createSeparation('For which resource would you like to perform a query?')
+  helper_fns.clearTerminal()
+  helper_fns.createSeparation('For which resource would you like to perform a query?', 'large')
   for i in range(len(supportedQueries)):
     print(f"{i+1}. {supportedQueries[i]['resource']}")
 
-  resourceChoice = int(input('Enter the option number: ')) - 1
+  resourceChoice = int(input('\nEnter the option number: ')) - 1
+  helper_fns.clearTerminal()
 
-  helper_fns.createSeparation('Here are all the avaiable queries this app can do: ')
+  helper_fns.createSeparation('Here are all the avaiable queries this app can do:')
 
-  for i in range(len(supportedQueries[resourceChoice]['queries'])):
-    print(f"{i+1}. {supportedQueries[resourceChoice]['queries'][i]['display']}")
+  resourceQueries = supportedQueries[resourceChoice]['queries']
 
-  queryChoice = int(input('Enter the option number: ')) - 1
+  for i in range(len(resourceQueries)):
+    print(f"{i+1}. {resourceQueries[i]['display']}")
 
-  supportedQueries[resourceChoice]['queries'][queryChoice]['fn']({'db_con': db_con, 'cursor': cursor})
+  queryChoice = int(input('\nEnter the option number: ')) - 1
+  helper_fns.clearTerminal()
+
+  resourceQueries[queryChoice]['fn']({'db_con': db_con, 'cursor': cursor})
+  helper_fns.pause()
 
 db_con.close()
